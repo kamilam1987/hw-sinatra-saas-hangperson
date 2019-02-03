@@ -13,16 +13,21 @@ class HangpersonGame
   
   def initialize(word)
     @word = word
-    @guesses = ""
-    @wrong_guesses = ""
+    @guesses = ''
+    @wrong_guesses = ''
   end
   
   def guess(letter)
-    raise ArgumentError if letter.nil? or letter.empty? or !(letter =~ /[a-z]/i)
+    raise ArgumentError if (letter.nil?) || (letter.empty?) || !(letter =~ /[a-z]/i)
     letter = letter.downcase
-    if @word.include? letter and !@guesses.include? letter
+    if (@word.include? letter) && (!@guesses.include? letter)
       @guesses << letter
       true
+    elsif (!@word.include? letter) && (!@wrong_guesses.include? letter)
+      @wrong_guesses << letter
+      true
+    else
+      false
     end
   end
 
