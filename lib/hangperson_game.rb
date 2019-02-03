@@ -15,8 +15,15 @@ class HangpersonGame
     @word = word
     @guesses = ""
     @wrong_guesses = ""
-    
-    
+  end
+  
+  def guess(letter)
+    raise ArgumentError if letter.nil? or letter.empty? or !(letter =~ /[a-z]/i)
+    letter = letter.downcase
+    if @word.include? letter and !@guesses.include? letter
+      @guesses << letter
+      true
+    end
   end
 
   # You can test it by running $ bundle exec irb -I. -r app.rb
